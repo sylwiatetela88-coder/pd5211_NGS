@@ -1,0 +1,10 @@
+# Ex_1 - Importowanie sekwencji w archiwum SRA
+
+```bash 
+conda create - SRA_tools -c bioconda sra-tools
+conda activate SRA_tools
+fasterq-dump --split-files SRR25629155
+head -n 10 SRR25629155_1.fastq
+```
+
+### Zidentyfikowany numer ID flow cell:HWFV2DRXY
