@@ -1,0 +1,1 @@
+fastqc -t 4 -o raporty_fastqc SRR25629155_1.fastq SRR25629155.fastq
