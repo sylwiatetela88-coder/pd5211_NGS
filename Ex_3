@@ -1,0 +1,6 @@
+Zadanie Ex_3 - Analiza MultiQC
+Uzyte poecenia:
+1. fastqc -t 4 -o raporty_fastqc SRR25629153.fastq.gz SRR25629154.fastq.gz SRR25629155_1.fastq SRR25629155_2.fastq 
+2. multiqc raport_fastqc -o multiqc_report
+Wnioski:
+Największy udział procentowy sekwencji duplikujących zawiera próbka SRR25629153 (37,1%), posiada ona również najwięcej odczytów. Zawartość we wszystkich próbkach jest wyrównana i wynosi 49%, co sugeruje spójność materiału. 
