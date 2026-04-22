@@ -1,0 +1,29 @@
+#!/bin/bash
+#---KONFIGURACJA---
+SAMPLES=("Ecoli_rep1" "Ecoli_rep2" "Ecoli_rep3")
+INDEX_PATH="ecoli_final_index"
+
+echo "Rozpoczynam przetwarzanie danych"
+
+for ID in "${SAMPLES[@]}"
+do
+	echo ">>> Przetwarzam próbkę:$ID"
+	if [-f "${ID}.sam" ]; then
+	echo "Konwersja SAM -> BAM..."
+	samtools view -S -b ${ID}.sam > ${ID}.bam
+	echo "Sortowanie po nazwach(name-sort)..."
+	samtools sort -n ${ID}.bam -o ${ID}_namesorted.bam
+	echo "Uruchamiam samtools fixmate..."
+	samtools fixmate -m ${ID}_namesorted.bam ${ID{_fixmate.bam
+	echo "Sortowanie po współrzędnych (coodinate-sort)..."
+	samtools sort ${ID}_fixmate.bam -o ${ID}_fixmate_sorted.bam
+	echo "Usuwanie duplikatów (markdup)..."
+	samtools markdup -r ${ID}_fixmate_sorted.bam ${ID}_dedup.bam
+	echo "Indeksowanie pliku wynikowego..."
+	samtools index ${ID}_dedup.bam
+	echo "Generowanie statystyk dla $ID:"
+	samtools flagstat ${ID}_dedup.bam > ${ID}_stats.txt
+
+	echo"---Zakończono pracę nad $ID---"
+done
+ls -lh *_dedup.bam
